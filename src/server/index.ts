@@ -18,7 +18,7 @@ app.post('/api/cells', (req: any, res) => {
   res.send('');
 });
 
-const listener = app.listen(3000, () => {
+const listener = app.listen(process.env.PORT, () => {
   cells.init();
   console.log(`collab-lifegame server ready. port: ${listener.address().port}`);
 });
