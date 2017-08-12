@@ -8,6 +8,7 @@ body {
   background: #222;
   color: #eee;
   text-align: center;
+  overflow-y: hidden;
 }
 
 canvas#main {
