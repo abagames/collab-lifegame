@@ -1,4 +1,5 @@
 node_modules/
 .vscode/
 nodemon.json
+.data/
 npm-debug.log

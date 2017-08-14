@@ -1,21 +1,36 @@
-const cellWidth = 32;
+import * as db from './db';
+
+export const cellWidth = 32;
+export const nullColor = '#333';
 let cells: string[][] = [];
 let nextCells: string[][] = [];
 let updatingCells: any[] = [];
-const nullColor = '#333';
 
-export function init() {
+export function init(dbCells = null) {
+  let i = 0;
   for (let x = 0; x < cellWidth; x++) {
     let line = [];
     let nextLine = [];
     for (let y = 0; y < cellWidth; y++) {
-      line.push(nullColor);
-      nextLine.push(nullColor);
+      const c = dbCells != null ? dbCells[i].color : nullColor;
+      i++;
+      line.push(c);
+      nextLine.push(c);
     }
     cells.push(line);
     nextCells.push(nextLine);
   }
   setInterval(update, 500);
+}
+
+export function saveToDb() {
+  let cellArray = [];
+  for (let x = 0; x < cellWidth; x++) {
+    for (let y = 0; y < cellWidth; y++) {
+      cellArray.push(cells[x][y]);
+    }
+  }
+  return db.save(cellArray);
 }
 
 export function addUpdatingCells(updatingCells: any[]) {
